@@ -22,8 +22,8 @@ const bankMenuCustomWidth = 'default'; // default, value in px or %
 const bankName = 'Bank'; // dropdown menu name
 const bankQuantity = 4; // total number of banks ranging from 3-8 (for 'top' or 'top-replace' use either 4 or 8)
 const presetCount = 20; // number of presets per bank (default: 20)
-const optionHidePresetButtons = false; // true, false  <-- 设为 true 则不注入 Settings 复选框
-const optionHideDisplayAll = false; // true, false  <-- 设为 true 则不注入 Show All 复选框
+const optionHidePresetButtons = true; // true, false  <-- 设为 true 则向SETTINGS面板注入 HIDE PRESET BUTTONS 复选框
+const optionHideDisplayAll = false; // true, false <-- 设为 true 则向SETTINGS面板注入 Show All 复选框
 const optionSaveAntenna = (!!document.getElementById('data-ant')); // (!!document.getElementById('data-ant')), true, false
 const optionAntennaDisplay = 'number'; // number, letter
 const optionHighlightSelectedPreset = true; // true, false
@@ -1574,7 +1574,7 @@ function AdditionalCheckboxesButtonPresets() {
   setTimeout(() => observer.disconnect(), 10000);
 }
 
-if (!optionHidePresetButtons) {
+if (optionHidePresetButtons) {
   AdditionalCheckboxesButtonPresets();
 }
 
@@ -1629,9 +1629,11 @@ function AdditionalCheckboxesDisplayAll() {
   setTimeout(() => observer.disconnect(), 10000);
 }
 
-if (!optionHideDisplayAll) {
+// 暂时不向settings面板注入"SHOW ALL PRESETS"
+if (optionHideDisplayAll) {
   AdditionalCheckboxesDisplayAll();
 }
+
 
 // ============================================================
 // 导出/导入/服务器配置
