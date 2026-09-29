@@ -102,7 +102,7 @@ let keysPressed = new Set();
 let hasUsedKeyboardNavigation = false;
 
 // ===== language =====
-let currentLang = localStorage.getItem(LANG_KEY) || 'cn'; // 'cn' | 'en'
+let currentLang = localStorage.getItem(LANG_KEY) || 'en'; // 'cn' | 'en'
 
 const i18n = {
   cn: {
