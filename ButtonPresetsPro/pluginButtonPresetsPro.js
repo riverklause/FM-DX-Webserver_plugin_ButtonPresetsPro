@@ -107,7 +107,7 @@ let currentLang = localStorage.getItem(LANG_KEY) || 'cn'; // 'cn' | 'en'
 const i18n = {
   cn: {
     menu: '菜单',
-    showAll: '显示全部预设',
+    showAll: '显示/隐藏全部预设',
     import: '导入本地配置',
     export: '导出配置文件',
     cloudLoad: '从服务器加载',
@@ -115,7 +115,7 @@ const i18n = {
   },
   en: {
     menu: 'Menu',
-    showAll: 'Show All Presets',
+    showAll: 'Show/Hide All Presets',
     import: 'Import Local Config',
     export: 'Export Config',
     cloudLoad: 'Load From Server',
