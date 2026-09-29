@@ -1,6 +1,6 @@
 /*
     Preset Buttons Pro v1.0 by riverklause
-    (Hide/Show in Settings + 显示全部 + SavedDefaultBank + 方案A 已补全)
+    (Hide/Show in Settings + 显示全部 + SavedDefaultBank + 方案A 已补全 + EN/CN)
 */
 
 'use strict';
@@ -88,6 +88,7 @@ const pluginName = "Preset Buttons Pro";
 const DISPLAY_KEY_ButtonPresets = 'buttonPresetsHidden';
 const DISPLAY_ALL_KEY = 'buttonPresetsDisplayAll';
 const SAVED_BANK_KEY = 'SavedDefaultBank';
+const LANG_KEY = 'presetButtonsLang';
 
 // ===== state =====
 let bankDisplayAll = false;
@@ -99,6 +100,32 @@ let frequencyObserver;
 let lastUsedPreset = null;
 let keysPressed = new Set();
 let hasUsedKeyboardNavigation = false;
+
+// ===== language =====
+let currentLang = localStorage.getItem(LANG_KEY) || 'cn'; // 'cn' | 'en'
+
+const i18n = {
+  cn: {
+    menu: '菜单',
+    showAll: '显示全部预设',
+    import: '导入本地配置',
+    export: '导出配置文件',
+    cloudLoad: '从服务器加载',
+    langSwitch: 'EN / 中文'
+  },
+  en: {
+    menu: 'Menu',
+    showAll: 'Show All Presets',
+    import: 'Import Local Config',
+    export: 'Export Config',
+    cloudLoad: 'Load From Server',
+    langSwitch: 'EN / 中文'
+  }
+};
+
+function t(key) {
+  return (i18n[currentLang] && i18n[currentLang][key]) || key;
+}
 
 // Additional styles
 let stylePresetsLayout = document.createElement('style');
@@ -1036,16 +1063,17 @@ function createMenuCard() {
 
   const label = document.createElement('div');
   label.className = 'menu-label';
-  label.textContent = '菜单';
+  label.textContent = t('menu');
   card.appendChild(label);
 
   const dropdown = document.createElement('div');
   dropdown.className = 'preset-menu-dropdown';
   dropdown.innerHTML = `
-    <button id="menu-toggle-display-all"><i class="fa-solid fa-table-cells"></i>显示全部预设</button>
-    <button id="menu-import"><i class="fa-solid fa-file-import"></i>导入本地配置</button>
-    <button id="menu-export"><i class="fa-solid fa-file-export"></i>导出配置文件</button>
-    <button id="menu-cloud-load"><i class="fa-solid fa-cloud-arrow-down"></i>从服务器加载</button>
+    <button id="menu-toggle-display-all"><i class="fa-solid fa-table-cells"></i>${t('showAll')}</button>
+    <button id="menu-import"><i class="fa-solid fa-file-import"></i>${t('import')}</button>
+    <button id="menu-export"><i class="fa-solid fa-file-export"></i>${t('export')}</button>
+    <button id="menu-cloud-load"><i class="fa-solid fa-cloud-arrow-down"></i>${t('cloudLoad')}</button>
+    <button id="menu-lang-switch"><i class="fa-solid fa-language"></i>${t('langSwitch')}</button>
   `;
   card.appendChild(dropdown);
 
@@ -1083,6 +1111,18 @@ function createMenuCard() {
     dropdown.classList.remove('show');
     card.classList.remove('dropdown-open');
     manualLoadFromServer();
+  });
+
+  // ===== EN/CN 切换 =====
+  dropdown.querySelector('#menu-lang-switch').addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdown.classList.remove('show');
+    card.classList.remove('dropdown-open');
+
+    currentLang = currentLang === 'cn' ? 'en' : 'cn';
+    localStorage.setItem(LANG_KEY, currentLang);
+
+    createMenuCard(); // 重建菜单，应用新语言
   });
 
   buttonContainer.appendChild(card);
