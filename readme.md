@@ -12,6 +12,7 @@ A preset button plugin for FM-DX Webserver. Supports multiple banks, show-all mo
 
 Copy `ButtonPresetsPro.js` and the `ButtonPresetsPro` folder into the `plugins` directory.
 
+[example]{https://github.com/riverklause/FM-DX-Webserver_plugin_ButtonPresetsPro/blob/main/preset_buttons.jpg?raw=true}
 ---
 
 ## 使用方法 / Usage
