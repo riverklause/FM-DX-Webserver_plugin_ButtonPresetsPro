@@ -4,6 +4,8 @@ FM-DX Webserver 的预设按钮插件，支持多 bank、显示全部、隐藏/�
 
 A preset button plugin for FM-DX Webserver. Supports multiple banks, show-all mode, hide/show, custom station names, antenna saving, and more.
 
+![](https://raw.githubusercontent.com/riverklause/FM-DX-Webserver_plugin_ButtonPresetsPro/refs/heads/main/preset_buttons.jpg)
+
 ---
 
 ## 安装 / Installation
